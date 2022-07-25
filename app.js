@@ -20,9 +20,9 @@ io.on('connection', socket =>{
         const user = userJoin(socket.id, username, room);
         socket.join(user.room);
 
-        socket.emit('message',formatMessage('ChatRoom BOT','welcome to ChatRoom') );
+        socket.emit('message',formatMessage('PodPEC Chat','Seja Bem-Vindo') );
 
-        socket.broadcast.to(user.room).emit('message',formatMessage('ChatRoom BOT',`${user.username} has joined the room`));
+        socket.broadcast.to(user.room).emit('message',formatMessage('PodPEC Chat: ',`${user.username} entrou na sala.`));
 
         io.to(user.room).emit('roomUsers', {
             room: user.room,
@@ -40,7 +40,7 @@ io.on('connection', socket =>{
 
         const user = userLeave(socket.id);
         if(user){
-            io.to(user.room).emit("message", formatMessage("ChatRoom BOT", `${user.username} has left the room`));
+            io.to(user.room).emit("message", formatMessage("PodPEC Chat", `${user.username} saiu da sala.`));
 
             io.to(user.room).emit("roomUsers", {
               room: user.room,
